@@ -1,0 +1,55 @@
+{
+  "name": "react-cmi5-assignable-unit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch",
+    "build": "webpack",
+    "example-install": "npm run build && npm pack && cp ${npm_package_name}-${npm_package_version}.tgz ${npm_package_name}-latest.tgz && cd example && npm run clean && npm install",
+    "postversion": "git push && git push --tags && npm run clean",
+    "clean": "rm -rf node_modules package-lock.json yarn.lock"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beatthat/react-cmi5-assignable-unit.git"
+  },
+  "keywords": [
+    "react",
+    "javascript",
+    "xapi",
+    "cmi5"
+  ],
+  "author": "larrykirschner@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beatthat/react-cmi5-assignable-unit/issues"
+  },
+  "homepage": "https://github.com/beatthat/react-cmi5-assignable-unit#readme",
+  "peerDependencies": {
+    "react": ">=15.0.1",
+    "react-dom": ">=15.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-cli": "^6.2.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "react": ">=15.0.1",
+    "react-dom": ">=15.0.1",
+    "webpack": "4.19.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "app-root-path": "^2.1.0",
+    "fs-extra": "^7.0.1"
+  }
+}
