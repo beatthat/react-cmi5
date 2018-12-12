@@ -12,7 +12,7 @@
     "start": "webpack --watch",
     "build": "webpack",
     "example-install": "npm run build && npm pack && cp ${npm_package_name}-${npm_package_version}.tgz ${npm_package_name}-latest.tgz && cd example && npm run clean && npm install",
-    "postversion": "git push && git push --tags && npm run clean",
+    "postversion": "git push && git push --tags",
     "clean": "rm -rf node_modules package-lock.json yarn.lock"
   },
   "repository": {
