@@ -1,5 +1,5 @@
 # react-cmi5
-An example CMI5 assignable unit that connects to an LMS (the XAPI backend of an LMS) and reads/writes an xapi statement
+React wrapper component for an xapi/cmi5 assignable unit @see https://github.com/AICC/CMI-5_Spec_Current/blob/quartz/cmi5_spec.md#au_requirements
 
 ## Integration in a React App
 
