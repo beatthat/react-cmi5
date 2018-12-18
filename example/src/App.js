@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import Cmi5AssignableUnit from 'react-cmi5-assignable-unit'
+import Cmi5AU from 'react-cmi5'
 import ExampleQuestion from './ExampleQuestion';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Cmi5AssignableUnit>
+        <Cmi5AU>
           <ExampleQuestion/>
-        </Cmi5AssignableUnit>
+        </Cmi5AU>
       </div>
     )
   }

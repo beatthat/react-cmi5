@@ -4,7 +4,7 @@ const appRoot = require('app-root-path').path
 
 const installCmi5Lib = async() => {
 	const srcPath = path.join(
-		appRoot, 'node_modules', 'react-cmi5-assignable-unit', 'src', 'cmi5.js'
+		appRoot, 'node_modules', 'react-cmi5', 'src', 'cmi5.js'
 	)
 
 	const tgtPath = path.join(appRoot, 'public', 'cmi5.js')

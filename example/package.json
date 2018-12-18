@@ -6,7 +6,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
-    "react-cmi5-assignable-unit": "../react-cmi5-assignable-unit-latest.tgz"
+    "react-cmi5": "../react-cmi5-latest.tgz"
   },
   "scripts": {
     "start": "react-scripts start",

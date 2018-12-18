@@ -35,7 +35,7 @@ const CMI_STATUS = {
  * and if either of the inject 'passed' or 'failed' functions is called
  * before cmi5 is ready, it will store the result and submit when ready.
  */
-class Cmi5AssignableUnit extends Component {
+class Cmi5AU extends Component {
 
   constructor(props) {
     super(props)
@@ -235,5 +235,5 @@ class Cmi5AssignableUnit extends Component {
    }
  }
 
-  export default Cmi5AssignableUnit
+  export default Cmi5AU
 
