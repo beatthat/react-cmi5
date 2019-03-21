@@ -48,9 +48,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Cmi5AssignableUnit>
+        <Cmi5AU>
           <ExampleQuestion/>
-        </Cmi5AssignableUnit>
+        </Cmi5AU>
       </div>
     )
   }
