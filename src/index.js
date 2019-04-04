@@ -62,8 +62,8 @@ class Cmi5AU extends Component {
  * 
  * @see https://github.com/AICC/CMI-5_Spec_Current/blob/quartz/cmi5_spec.md#verbs_failed} score 
  */
-  passed(score) {
-    this._submitScore(score, true)
+  passed(score, extensions) {
+    this._submitScore(score, true, extensions)
   }
 
 /**
@@ -76,8 +76,8 @@ class Cmi5AU extends Component {
  * 
  * @see https://github.com/AICC/CMI-5_Spec_Current/blob/quartz/cmi5_spec.md#verbs_failed} score 
  */
-  failed(score) {
-    this._submitScore(score, false)
+  failed(score, extensions) {
+    this._submitScore(score, false, extensions)
   }
 
   /**
@@ -87,9 +87,9 @@ class Cmi5AU extends Component {
    * 
    * @see https://github.com/AICC/CMI-5_Spec_Current/blob/quartz/cmi5_spec.md#verbs_completed
    */
-  completed() {
+  completed(extensions) {
     this._execCmiOrQueue(() => {
-      this.state.cmi.completed()
+      this.state.cmi.completed(extensions)
     })
   }
 
@@ -110,15 +110,15 @@ class Cmi5AU extends Component {
    * submit a score if cmi is ready,
    * or if cmi is not ready, store the action for later execution.
    */
-  _submitScore(result, isPassing) {
+  _submitScore(result, isPassing, extensions) {
     const score = isNaN(Number(result))? result: { scaled: Number(result) }
 
     this._execCmiOrQueue(() => {
       if(isPassing) {
-        this.state.cmi.passed(score)
+        this.state.cmi.passed(score, extensions)
       }
       else {
-        this.state.cmi.failed(score)
+        this.state.cmi.failed(score, extensions)
       }
     })
     this.setState({

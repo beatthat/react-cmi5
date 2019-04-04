@@ -11,9 +11,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
     "build": "webpack",
-    "example-install": "npm run build && npm pack && cp ${npm_package_name}-${npm_package_version}.tgz ${npm_package_name}-latest.tgz && cd example && npm run clean && npm install",
+    "pack-latest": "npm run build && npm pack && cp ${npm_package_name}-${npm_package_version}.tgz ${npm_package_name}-latest.tgz",
     "postversion": "git push && git push --tags",
-    "clean": "rm -rf node_modules package-lock.json yarn.lock"
+    "clean": "rm -rf node_modules package-lock.json yarn.lock *.tgz"
   },
   "repository": {
     "type": "git",
@@ -36,20 +36,22 @@
     "react-dom": ">=15.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.2.0",
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^8.0.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "react": ">=15.0.1",
-    "react-dom": ">=15.0.1",
-    "webpack": "4.19.1",
-    "webpack-cli": "^3.1.2"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack": "4.28.3",
+    "webpack-cli": "^3.3.0"
   },
   "dependencies": {
-    "app-root-path": "^2.1.0",
+    "app-root-path": "^2.2.1",
     "fs-extra": "^7.0.1"
   }
 }

@@ -16304,11 +16304,16 @@ var Cmi5;
             Method to indicate learner has completed the AU, sends completed statement
 
             @method completed
+            @param {Object} [extensions] [optional] Extensions object to be included in statement result (see `passedStatement`)
             @param {Function} [callback] Function to call on error or success
             @throws {Error} <ul><li>AU not active</li><li>AU not in normal launch mode</li><li>AU already completed</li></ul>
         */
-        completed: function (callback) {
+        completed: function (extensions, callback) {
             this.log("completed");
+            if(typeof(extensions) === 'function') {
+                callback = extensions
+                extensions = undefined
+            }
             var st,
                 err,
                 callbackWrapper,
@@ -16350,7 +16355,7 @@ var Cmi5;
                 throw err;
             }
 
-            st = this.completedStatement();
+            st = this.completedStatement(extensions);
 
             if (callback) {
                 callbackWrapper = function (err) {
@@ -16380,11 +16385,17 @@ var Cmi5;
 
             @method passed
             @param {Object} [score] Score to be included in statement (see `passedStatement`)
+            @param {Object} [extenstions] [optional] Extensions object to be included in statement result (see `passedStatement`)
             @param {Function} [callback] Function to call on error or success
             @throws {Error} <ul><li>AU not active,</li><li>AU not in normal launch mode,</li><li>AU already passed,</li><li>Failed to create passed statement (usually because of malformed score)</li></ul>
         */
-        passed: function (score, callback) {
+        passed: function (score, extensions, callback) {
             this.log("passed");
+            if(typeof(extensions) === 'function') {
+                callback = extensions
+                extensions = undefined
+            }
+
             var st,
                 err,
                 callbackWrapper,
@@ -16427,7 +16438,7 @@ var Cmi5;
             }
 
             try {
-                st = this.passedStatement(score);
+                st = this.passedStatement(score, extensions);
             }
             catch (ex) {
                 this.log("passed - failed to create passed statement: " + ex);
@@ -16468,8 +16479,12 @@ var Cmi5;
             @param {Function} [callback] Function to call on error or success
             @throws {Error} <ul><li>AU not active</li><li>AU not in normal launch mode</li><li>AU already passed/failed</li><li>Failed to create failed statement (usually because of malformed score)</li></ul>
         */
-        failed: function (score, callback) {
+        failed: function (score, extensions, callback) {
             this.log("failed");
+            if(typeof(extensions) === 'function') {
+                callback = extensions
+                extensions = undefined
+            }
             var st,
                 err,
                 callbackWrapper,
@@ -16512,7 +16527,7 @@ var Cmi5;
             }
 
             try {
-                st = this.failedStatement(score);
+                st = this.failedStatement(score, extensions);
             }
             catch (ex) {
                 this.log("failed - failed to create failed statement: " + ex);
@@ -17317,9 +17332,10 @@ var Cmi5;
 
             @method passedStatement
             @param {Object} [score] Object to be used as the score, must meet masteryScore requirements, etc.
+            @param {Object} [extensions] [optional] Object to added to result.extensions
             @return {TinCan.Statement} Passed statement
         */
-        passedStatement: function (score) {
+        passedStatement: function (score, extensions) {
             this.log("passedStatement");
             var st = this._prepareStatement(VERB_PASSED_ID),
                 masteryScore;
@@ -17327,6 +17343,7 @@ var Cmi5;
             st.result = st.result || new TinCan.Result();
             st.result.success = true;
             st.result.duration = TinCan.Utils.convertMillisecondsToISO8601Duration(this.getDuration());
+            st.result.extensions = extensions;
 
             if (score) {
                 try {
@@ -17364,9 +17381,10 @@ var Cmi5;
 
             @method failedStatement
             @param {Object} [score] Object to be used as the score, must meet masteryScore requirements, etc.
+            @param {Object} [extensions] [optional] Object to added to result.extensions
             @return {TinCan.Statement} Failed statement
         */
-        failedStatement: function (score) {
+        failedStatement: function (score, extensions) {
             this.log("failedStatement");
             var st = this._prepareStatement(VERB_FAILED_ID),
                 masteryScore;
@@ -17374,6 +17392,7 @@ var Cmi5;
             st.result = st.result || new TinCan.Result();
             st.result.success = false;
             st.result.duration = TinCan.Utils.convertMillisecondsToISO8601Duration(this.getDuration());
+            st.result.extensions = extensions;
 
             if (score) {
                 try {
@@ -17410,15 +17429,17 @@ var Cmi5;
             their own.
 
             @method completedStatement
+            @param {Object} [extensions] [optional] Object to added to result.extensions
             @return {TinCan.Statement} Completed statement
         */
-        completedStatement: function () {
+        completedStatement: function (extensions) {
             this.log("completedStatement");
             var st = this._prepareStatement(VERB_COMPLETED_ID);
 
             st.result = st.result || new TinCan.Result();
             st.result.completion = true;
             st.result.duration = TinCan.Utils.convertMillisecondsToISO8601Duration(this.getDuration());
+            st.result.extensions = extensions;
 
             st.context.contextActivities.category.push(CATEGORY_ACTIVITY_MOVEON);
 

@@ -1,0 +1,29 @@
+{
+  "name": "cmi5-react",
+  "version": "1.0.1",
+  "private": true,
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-cmi5": "../../react-cmi5-latest.tgz",
+    "react-dom": "^16.8.6",
+    "react-scripts": "^2.1.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "clean": "rm -rf node_modules package-lock.json yarn.lock",
+    "preinstall": "cd $(git rev-parse --show-toplevel 2>/dev/null) && npm run pack-latest"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "homepage": "/resources/taf/example-01"
+}
